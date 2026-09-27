@@ -1,0 +1,21 @@
+# ====================================================================
+# Minimal & Stable Backend Dependencies for EduGenAI Hackathon
+# ====================================================================
+
+# Web Framework and ASGI Server
+fastapi>=0.110.0
+uvicorn[standard]>=0.28.0
+
+# Official Google GenAI SDK (Gemini)
+google-genai>=0.1.1
+
+# Configuration & Environment Variables
+python-dotenv>=1.0.1
+pydantic>=2.6.0
+
+# ====================================================================
+# OPTIONAL MODULES (Uncomment tomorrow ONLY if needed by problem statement)
+# ====================================================================
+# pypdf>=4.1.0               # For extracting text from PDF uploads
+# chromadb>=0.4.24           # For local RAG vector search
+# sqlalchemy>=2.0.28         # If structured relational tables are needed
