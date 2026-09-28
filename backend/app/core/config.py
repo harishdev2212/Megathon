@@ -28,8 +28,14 @@ else:
 
 # Read configuration variables with sensible defaults
 GEMINI_API_KEY: str = os.getenv("GEMINI_API_KEY", "")
+GEMINI_MODEL: str = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 HOST: str = os.getenv("HOST", "127.0.0.1")
 PORT: int = int(os.getenv("PORT", "8000"))
+MAX_UPLOAD_SIZE_MB: int = int(os.getenv("MAX_UPLOAD_SIZE_MB", "20"))
+
+# Base upload directory
+UPLOAD_DIR: Path = PROJECT_ROOT / "uploads"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 # Parse allowed origins for CORS
 raw_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173")

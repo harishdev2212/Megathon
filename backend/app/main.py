@@ -21,9 +21,13 @@ ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from backend.app.core.config import ALLOWED_ORIGINS, HOST, PORT
+from backend.app.core.config import ALLOWED_ORIGINS, HOST, PORT, UPLOAD_DIR
 from backend.app.api.health import router as health_router
 from backend.app.api.ai import router as ai_router
+from backend.app.api.documents import router as documents_router
+
+# Ensure upload directory exists
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 
 # Initialize the FastAPI application
 app = FastAPI(
@@ -47,6 +51,7 @@ app.add_middleware(
 # Register API Routers
 app.include_router(health_router)
 app.include_router(ai_router)
+app.include_router(documents_router)
 
 
 @app.get("/", tags=["Root"])
@@ -60,7 +65,12 @@ def root():
         "docs_url": "http://localhost:8000/docs",
         "endpoints": {
             "health": "/api/health",
-            "ai_test": "/api/ai/test"
+            "ai_generate": "/api/ai/generate",
+            "ai_analyze_image": "/api/ai/analyze-image",
+            "ai_task": "/api/ai/task",
+            "ai_tasks": "/api/ai/tasks",
+            "documents_upload": "/api/documents/upload",
+            "ai_test_legacy": "/api/ai/test"
         }
     }
 
